@@ -14,4 +14,5 @@ RUN go build -o app ./...
 FROM alpine:latest
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /src/server/app /app
-ENTRYPOINT ["/app"]
+ENV PORT 8080
+ENTRYPOINT /app -port $PORT

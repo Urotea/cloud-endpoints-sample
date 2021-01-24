@@ -1,4 +1,5 @@
 syntax = "proto3";
+package endpoints.examples;
 option go_package = "github.com/Urotea/cloud-endpoints-sample/proto";
 
 // The greeting service definition.

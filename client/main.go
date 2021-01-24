@@ -8,11 +8,15 @@ import (
 
 	pb "github.com/Urotea/cloud-endpoints-sample/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 func main() {
 	context := context.Background()
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure(), grpc.WithTimeout(time.Duration(10*time.Second)))
+	conn, err := grpc.Dial(
+		"SERVER_HOST_NAME:443",
+		grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")),
+		grpc.WithTimeout(time.Duration(10*time.Second)))
 	if err != nil {
 		log.Fatalf("client connection error: %#v \n", err)
 	}

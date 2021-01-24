@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -19,8 +20,12 @@ func (s *greeterServer) SayHello(context context.Context, req *pb.HelloRequest) 
 	return &pb.HelloReply{Message: "reply"}, nil
 }
 
+var port = flag.String("port", "8080", "set port")
+
 func main() {
-	lis, err := net.Listen("tcp", "localhost:9000")
+	flag.Parse()
+
+	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%s", *port))
 	if err != nil {
 		log.Fatalf("portの指定に失敗しました。 err = %#v \n", err)
 	}
